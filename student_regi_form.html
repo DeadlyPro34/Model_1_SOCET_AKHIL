@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    <form action="#" method="post">
+        <label>Name:</label>
+        <input type="text" placeholder="Enter your name" required><br><br>
+
+        <label>Enrollment No.:</label>
+        <input type="text" placeholder="Enter enrollment number" required><br><br>
+
+        <label>Branch:</label>
+        <select required>
+            <option value="">Select Branch</option>
+            <option value="CSE">Computer Science and Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="EE">Electrical Engineering</option>
+            <option value="ME">Mechanical Engineering</option>
+        </select><br><br>
+
+        <label>Division:</label>
+        <input type="number" maxlength="1" placeholder="Enter your division" required><br><br>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br><br>
+
+
+        <label>Phone Number:</label>
+        <input type="text" placeholder="Enter your phone number" required><br><br>
+
+
+        <label>Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required><br>
+
+        <label>Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+
+        <label>Upload Photo:</label>
+        <input type="file" accept="image/*" required><br><br>
+
+        <label>Result:</label>
+        <input type="text" id="result" name="result" placeholder="Enter your result" required><br><br>
+
+        <input type="reset" value="Clear">
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
