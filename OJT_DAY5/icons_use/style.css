@@ -1,0 +1,27 @@
+.input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-container i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    z-index: 1;
+}
+
+.input-container input,
+.input-container select,
+.input-container textarea {
+    padding-left: 40px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.input-container textarea {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

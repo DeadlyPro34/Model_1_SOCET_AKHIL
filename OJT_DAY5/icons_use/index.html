@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    <form action="#" method="post">
+        <label>Name:</label>
+        <div class="input-container">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Enter your name" required>
+        </div><br><br>
+
+        <label>Enrollment No.:</label>
+        <div class="input-container">
+            <i class="fas fa-id-card"></i>
+            <input type="text" placeholder="Enter enrollment number" required>
+        </div><br><br>
+
+        <label>Branch:</label>
+        <div class="input-container">
+            <i class="fas fa-graduation-cap"></i>
+            <select required>
+                <option value="">Select Branch</option>
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="IT">Information Technology</option>
+                <option value="EE">Electrical Engineering</option>
+                <option value="ME">Mechanical Engineering</option>
+            </select>
+        </div><br><br>
+
+        <label>Division:</label>
+        <div class="input-container">
+            <i class="fas fa-hashtag"></i>
+            <input type="number" maxlength="1" placeholder="Enter your division" required>
+        </div><br><br>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br><br>
+
+
+        <label>Phone Number:</label>
+        <div class="input-container">
+            <i class="fas fa-phone"></i>
+            <input type="text" placeholder="Enter your phone number" required>
+        </div><br><br>
+
+
+        <label>Email:</label>
+        <div class="input-container">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div><br>
+
+        <label>Password:</label>
+        <div class="input-container">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div><br><br>
+
+        <label>Upload Photo:</label>
+        <div class="input-container">
+            <i class="fas fa-upload"></i>
+            <input type="file" accept="image/*" required>
+        </div><br><br>
+
+        <label>Remark:</label>
+        <div class="input-container">
+            <i class="fas fa-comment"></i>
+            <textarea id="remarks" placeholder="Enter your remarks" required></textarea>
+        </div><br><br>
+
+        <input type="reset" value="Clear">
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
