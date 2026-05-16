@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-5">
+    <div class="container">
+        <header class="text-center mb-4">
+            <h1 class="display-4 mb-4">Student Registration Form</h1>
+        </header>
+        <main class="bg-white rounded p-4 shadow-sm" style="max-width: 600px; margin: 0 auto;">
+            <form action="#" method="post">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Personal Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="enrollment" class="form-label">Enrollment No.:</label>
+                            <input type="text" class="form-control" id="enrollment" name="enrollment" placeholder="Enter enrollment number" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="branch" class="form-label">Branch:</label>
+                            <select class="form-select" id="branch" name="branch" required>
+                                <option value="">Select Branch</option>
+                                <option value="CSE">Computer Science and Engineering</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="EE">Electrical Engineering</option>
+                                <option value="ME">Mechanical Engineering</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="division" class="form-label">Division:</label>
+                            <input type="number" class="form-control" id="division" name="division" placeholder="Enter your division" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label d-block">Gender:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="male" name="gender" value="male" required>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="female" name="gender" value="female" required>
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Contact Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Account Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Upload Photo:</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Additional Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="remarks" class="form-label">Remark:</label>
+                            <textarea class="form-control" id="remarks" name="remarks" placeholder="Enter your remarks" rows="4" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <input type="reset" class="btn btn-danger" value="Clear">
+                    <input type="submit" class="btn btn-success" value="Submit">
+                </div>
+            </form>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
