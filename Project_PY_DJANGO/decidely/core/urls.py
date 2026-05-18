@@ -8,6 +8,7 @@ urlpatterns = [
     path('choices/', views.choices, name='choices'),
     path('choices/add/', views.add_choice, name='add_choice'),
     path('choices/delete/<int:choice_id>/', views.delete_choice, name='delete_choice'),
+    path('api/save-decision/', views.save_decision, name='save_decision'),
     path('history/', views.history, name='history'),
     path('categories/', views.categories, name='categories'),
     path('insights/', views.insights, name='insights'),

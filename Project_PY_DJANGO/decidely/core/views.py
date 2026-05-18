@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, Choice
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import Category, Choice, DecisionHistory
 
 def dashboard(request):
     # Initialize default categories if none exist (beginner-friendly fallback)
@@ -25,7 +28,37 @@ def dashboard(request):
         'choices': all_choices
     })
 
+@csrf_exempt
+def save_decision(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            choice_name = data.get('choice_name')
+            
+            if choice_name:
+                # Find the choice in DB. If not found, use or create one in the default category
+                choice = Choice.objects.filter(name=choice_name).first()
+                if not choice:
+                    default_cat, _ = Category.objects.get_or_create(name="Other")
+                    choice = Choice.objects.create(name=choice_name, category=default_cat)
+                
+                # Save into DecisionHistory
+                DecisionHistory.objects.create(
+                    selected_choice=choice,
+                    category=choice.category
+                )
+                
+                return JsonResponse({'status': 'success', 'message': 'Decision saved successfully!'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Choice name is required.'}, status=400)
+                
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON.'}, status=400)
+            
+    return JsonResponse({'status': 'error', 'message': 'Only POST method allowed.'}, status=405)
+
 def choices(request):
+
     # Initialize default categories if none exist (beginner-friendly fallback)
     if not Category.objects.exists():
         Category.objects.create(name="Food & Dining")

@@ -82,8 +82,29 @@ function spinWheel() {
         const normalizedDegree = (360 - (actualDegree - offset) % 360) % 360;
         const index = Math.floor(normalizedDegree / (360 / options.length));
 
-        decisionResult.innerText = options[index];
+        const selectedName = options[index];
+        decisionResult.innerText = selectedName;
         resultBox.classList.remove('hidden');
+
+        // Post the selection to the Django database
+        fetch('/api/save-decision/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ choice_name: selectedName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Confirm save success visually in the UI
+                const successBadge = document.createElement('span');
+                successBadge.className = "ml-2.5 inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-100 animate-pulse";
+                successBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-[9px]"></i> Saved`;
+                decisionResult.appendChild(successBadge);
+            }
+        })
+        .catch(err => console.error("Error saving decision to backend:", err));
     }, 4000);
 }
 
