@@ -1,0 +1,50 @@
+:root {
+    --bg-main: #F8FAFC;
+    --sidebar-bg: #FFFFFF;
+    --accent-primary: #4F46E5;
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border-subtle: #E2E8F0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+}
+
+.bg-dots {
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.4;
+}
+
+.pro-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+    transition: all 0.2s ease;
+}
+
+.sidebar-link {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background-color: #F1F5F9;
+    color: var(--accent-primary);
+}
+
+.sidebar-link.active {
+    font-weight: 600;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}

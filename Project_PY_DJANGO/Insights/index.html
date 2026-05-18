@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decidely | Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="h-screen flex overflow-hidden">
+    <div class="fixed inset-0 bg-dots -z-10"></div>
+
+    <aside class="w-64 h-full bg-white border-r border-slate-200 flex flex-col z-20">
+        <div class="p-6">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                    D
+                </div>
+                <span class="text-lg font-bold tracking-tight text-slate-900">Decidely</span>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-2 space-y-1">
+            <p class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Main Menu</p>
+            <a href="dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-house-chimney text-xs"></i>
+                Dashboard
+            </a>
+            <a href="choices.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-layer-group text-xs"></i>
+                Choices Library
+            </a>
+            <a href="history.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-clock-rotate-left text-xs"></i>
+                Resolution History
+            </a>
+            
+            <p class="px-3 mt-8 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Workspace</p>
+            <a href="categories.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-tags text-xs"></i>
+                Categories
+            </a>
+            <a href="#" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-chart-line text-xs"></i>
+                Insights
+            </a>
+            <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-user text-xs"></i>
+                Profile
+            </a>
+        </nav>
+
+        <div class="p-4 mt-auto border-t border-slate-100">
+            <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50">
+                <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 h-full overflow-y-auto relative bg-slate-50/50">
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
+            <div class="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                <span>Workspace</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <span class="text-slate-900">Insights</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Last Sync: Just now</span>
+                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                    <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-7xl mx-auto space-y-8">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Analytics Insights</h1>
+                <p class="text-slate-500 text-sm">Visualize your decision-making habits and patterns.</p>
+            </div>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Most Selected Choice</p>
+                        <h3 class="text-xl font-bold text-slate-900">Taco Bell</h3>
+                        <p class="text-xs text-indigo-600 font-semibold mt-2">Chosen 14 times this month</p>
+                    </div>
+                    <i class="fa-solid fa-crown absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+                </div>
+
+                <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Decisions</p>
+                        <h3 class="text-xl font-bold text-slate-900">1,248</h3>
+                        <p class="text-xs text-emerald-600 font-semibold mt-2">+12% vs last month</p>
+                    </div>
+                    <i class="fa-solid fa-bolt-lightning absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+                </div>
+
+                <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Favorite Category</p>
+                        <h3 class="text-xl font-bold text-slate-900">Food & Dining</h3>
+                        <p class="text-xs text-orange-500 font-semibold mt-2">42% of all resolutions</p>
+                    </div>
+                    <i class="fa-solid fa-heart absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Bar Chart -->
+                <div class="pro-card p-8 rounded-2xl">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="font-bold text-slate-900">Category Usage</h3>
+                        <select class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-transparent border-none outline-none cursor-pointer">
+                            <option>Last 30 Days</option>
+                            <option>Last 7 Days</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="categoryBarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="pro-card p-8 rounded-2xl">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="font-bold text-slate-900">Decision Distribution</h3>
+                        <i class="fa-solid fa-circle-info text-slate-300 text-xs cursor-pointer hover:text-slate-500"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="decisionPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <section class="pro-card p-8 rounded-2xl bg-slate-900 text-white relative overflow-hidden">
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div>
+                        <span class="bg-indigo-500/20 text-indigo-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Weekly Performance</span>
+                        <h2 class="text-2xl font-bold mt-3">You made 12 decisions this week.</h2>
+                        <p class="text-slate-400 text-sm mt-1 max-w-md">That's an average of 1.7 decisions per day. You saved approximately 24 minutes of deliberation time.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-center">
+                            <p class="text-2xl font-bold">84%</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Confidence Score</p>
+                        </div>
+                        <div class="w-px h-10 bg-slate-800"></div>
+                        <div class="text-center">
+                            <p class="text-2xl font-bold">12</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Goals Reached</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Abstract visual element -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js">
+        
+    </script>
+</body>
+</html>
