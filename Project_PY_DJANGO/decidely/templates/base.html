@@ -19,6 +19,16 @@
             document.documentElement.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         }
+
+        // Database reduced motion is the single source of truth, synchronizing localStorage
+        const dbMotion = {% if app_settings.reduced_motion %}true{% else %}false{% endif %};
+        if (dbMotion) {
+            document.documentElement.classList.add('reduced-motion');
+            localStorage.setItem('reduced_motion', 'true');
+        } else {
+            document.documentElement.classList.remove('reduced-motion');
+            localStorage.setItem('reduced_motion', 'false');
+        }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -34,6 +44,13 @@
         .dark thead th.text-slate-500,
         .dark th.text-slate-500,
         .dark tr th,
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: #F1F5F9 !important; /* Premium ultra-bright Slate-100 for titles and headers */
+        }
+
+        /* Keep timestamps, details, and secondary metadata beautifully muted for visual hierarchy */
+        .dark td.text-slate-500,
+        .dark td .text-slate-500,
         .dark .text-slate-500,
         .dark .text-xs.text-slate-500,
         .dark p.text-slate-500,
@@ -42,7 +59,18 @@
         .dark p.text-xs.text-slate-400,
         .dark .text-slate-300,
         .dark i.text-slate-300 {
-            color: #F1F5F9 !important; /* Premium ultra-bright Slate-100 for perfect legibility in dark mode */
+            color: #94A3B8 !important; /* Elegant muted slate gray for perfect readability without clutter */
+        }
+
+        /* Premium consistent dark mode overrides for emerald / green badges */
+        .dark .bg-emerald-100,
+        .dark .bg-emerald-50 {
+            background-color: rgba(16, 185, 129, 0.15) !important;
+            color: #34D399 !important;
+        }
+        .dark .text-emerald-700,
+        .dark .text-emerald-600 {
+            color: #34D399 !important;
         }
 
         /* Stunning glowing backdrop icons for stats cards in dark mode */
@@ -86,6 +114,22 @@
         .pro-card-dark button:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
+        }
+
+        /* ========================================================
+           ACCESSIBILITY: REDUCED MOTION STYLES (DISABLES TRANSITIONS)
+           ======================================================== */
+        .reduced-motion *,
+        .reduced-motion *:before,
+        .reduced-motion *:after {
+            animation-delay: -1ms !important;
+            animation-duration: 1ms !important;
+            animation-iteration-count: 1 !important;
+            background-attachment: initial !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0s !important;
+            transition-delay: 0s !important;
+            transform: none !important;
         }
     </style>
     {% block extra_head %}{% endblock %}

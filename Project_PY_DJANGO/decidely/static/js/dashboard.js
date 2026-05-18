@@ -64,11 +64,20 @@ function spinWheel() {
     resultBox.classList.add('hidden');
 
     // Randomly determine spins (between 4 and 6 full rotations)
-    const extraSpins = 4 + Math.random() * 2;
+    const isReducedMotion = document.documentElement.classList.contains('reduced-motion') || localStorage.getItem('reduced_motion') === 'true';
+    const extraSpins = isReducedMotion ? 1 : 4 + Math.random() * 2;
     const targetRotation = currentRotation + (extraSpins * 360) + (Math.random() * 360);
     currentRotation = targetRotation;
 
+    if (isReducedMotion) {
+        wheel.style.transition = 'none';
+    } else {
+        wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    }
+
     wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    const spinDuration = isReducedMotion ? 150 : 4000;
 
     setTimeout(() => {
         isSpinning = false;
@@ -105,7 +114,7 @@ function spinWheel() {
             }
         })
         .catch(err => console.error("Error saving decision to backend:", err));
-    }, 4000);
+    }, spinDuration);
 }
 
 // Call drawing function when page is ready

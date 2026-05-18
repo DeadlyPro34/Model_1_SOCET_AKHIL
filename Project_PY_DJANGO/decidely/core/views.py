@@ -125,15 +125,18 @@ def save_settings(request):
                 data = json.loads(request.body)
                 theme = data.get('theme', 'light')
                 notifications = data.get('notifications', False)
+                reduced_motion = data.get('reduced_motion', False)
             except json.JSONDecodeError:
                 return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
         else:
             theme = 'dark' if request.POST.get('theme') == 'dark' else 'light'
             notifications = True if request.POST.get('notifications') in ['true', 'on'] else False
+            reduced_motion = True if request.POST.get('reduced_motion') in ['true', 'on'] else False
         
         settings, _ = Settings.objects.get_or_create(pk=1)
         settings.theme = theme
         settings.notifications = notifications
+        settings.reduced_motion = reduced_motion
         settings.save()
         
         if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.content_type == 'application/json':
@@ -141,7 +144,8 @@ def save_settings(request):
                 'status': 'success',
                 'message': 'Settings saved successfully!',
                 'theme': settings.theme,
-                'notifications': settings.notifications
+                'notifications': settings.notifications,
+                'reduced_motion': settings.reduced_motion
             })
             
     return redirect('core:settings')

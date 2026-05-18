@@ -106,10 +106,12 @@ function saveSettingsToServer() {
     
     const themeToggle = document.getElementById('themeToggle');
     const notificationsToggle = document.querySelector('input[name="notifications"]');
+    const motionToggle = document.getElementById('motionToggle');
     
     const data = {
         theme: (themeToggle && themeToggle.checked) ? 'dark' : 'light',
-        notifications: (notificationsToggle && notificationsToggle.checked)
+        notifications: (notificationsToggle && notificationsToggle.checked),
+        reduced_motion: (motionToggle && motionToggle.checked)
     };
     
     // Show premium "Saving..." spinner toast
@@ -170,6 +172,19 @@ document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
                 console.log("Light mode activated");
+            }
+        }
+
+        // Instant visual feedback for Reduced Motion change
+        if (this.id === 'motionToggle') {
+            if (this.checked) {
+                document.documentElement.classList.add('reduced-motion');
+                localStorage.setItem('reduced_motion', 'true');
+                console.log("Reduced motion activated");
+            } else {
+                document.documentElement.classList.remove('reduced-motion');
+                localStorage.setItem('reduced_motion', 'false');
+                console.log("Reduced motion deactivated");
             }
         }
         

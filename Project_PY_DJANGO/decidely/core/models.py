@@ -34,9 +34,10 @@ class DecisionHistory(models.Model):
 class Settings(models.Model):
     theme = models.CharField(max_length=10, default='light')
     notifications = models.BooleanField(default=True)
+    reduced_motion = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Settings (Theme: {self.theme}, Notifications: {self.notifications})"
+        return f"Settings (Theme: {self.theme}, Notifications: {self.notifications}, Reduced Motion: {self.reduced_motion})"
 
     class Meta:
         verbose_name_plural = "Settings"
