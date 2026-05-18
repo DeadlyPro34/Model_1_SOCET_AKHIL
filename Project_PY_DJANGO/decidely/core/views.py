@@ -146,4 +146,12 @@ def save_settings(request):
             
     return redirect('core:settings')
 
+from django.views.decorators.http import require_POST
+
+@require_POST
+def reset_workspace(request):
+    DecisionHistory.objects.all().delete()
+    Choice.objects.all().delete()
+    return JsonResponse({'status': 'success', 'message': 'Workspace reset completed successfully!'})
+
 

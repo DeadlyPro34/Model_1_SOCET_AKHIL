@@ -1,8 +1,42 @@
 function handleReset() {
-    const confirmed = confirm("Warning: This will permanently delete all your data. Are you absolutely sure?");
+    const confirmed = confirm("Warning: This will permanently delete all your choices and decision history. Are you absolutely sure?");
     if (confirmed) {
-        console.log("Data reset initiated...");
-        // In a real app, this would trigger an API call.
+        const resetBtn = document.getElementById('resetBtn');
+        if (!resetBtn) return;
+        
+        const url = resetBtn.getAttribute('data-url');
+        const form = document.querySelector('form');
+        if (!form) return;
+        const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+        showToast('Resetting workspace...', 'info');
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Reset failed');
+            return response.json();
+        })
+        .then(result => {
+            if (result.status === 'success') {
+                showToast('Workspace reset successfully!', 'success');
+                // Redirect to dashboard after a short delay so they can see the success toast
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1500);
+            } else {
+                showToast('Failed to reset workspace.', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error resetting workspace:', error);
+            showToast('Connection error. Reset failed.', 'error');
+        });
     }
 }
 

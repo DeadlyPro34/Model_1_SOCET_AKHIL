@@ -149,7 +149,7 @@
                         <p class="text-sm font-semibold text-slate-700">Reset All Data</p>
                         <p class="text-xs text-slate-400">Clear all choices, categories, and history. This cannot be undone.</p>
                     </div>
-                    <button type="button" onclick="handleReset()" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl text-sm font-bold transition-all shadow-sm active:scale-95">
+                    <button type="button" id="resetBtn" data-url="{% url 'core:reset_workspace' %}" onclick="handleReset()" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl text-sm font-bold transition-all shadow-sm active:scale-95">
                         Reset Workspace
                     </button>
                 </div>
