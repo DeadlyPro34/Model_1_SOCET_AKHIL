@@ -25,29 +25,29 @@
 
         <nav class="flex-1 px-4 py-2 space-y-1">
             <p class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Main Menu</p>
-            <a href="dashboard.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:dashboard' %}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-house-chimney text-xs"></i>
                 Dashboard
             </a>
-            <a href="choices.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:choices' %}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-layer-group text-xs"></i>
                 Choices Library
             </a>
-            <a href="history.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:history' %}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-clock-rotate-left text-xs"></i>
                 Resolution History
             </a>
             
             <p class="px-3 mt-8 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Workspace</p>
-            <a href="#" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:categories' %}" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-tags text-xs"></i>
                 Categories
             </a>
-            <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:profile' %}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-user text-xs"></i>
                 Profile
             </a>
-            <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+            <a href="{% url 'core:settings' %}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
                 <i class="fa-solid fa-gear text-xs"></i>
                 Settings
             </a>
