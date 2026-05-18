@@ -2,7 +2,28 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Choice
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    # Initialize default categories if none exist (beginner-friendly fallback)
+    if not Category.objects.exists():
+        Category.objects.create(name="Food & Dining")
+        Category.objects.create(name="Health")
+        Category.objects.create(name="Entertainment")
+        Category.objects.create(name="Work")
+        Category.objects.create(name="Other")
+
+    # Initialize default choices if none exist so the wheel isn't blank
+    if not Choice.objects.exists():
+        food = Category.objects.get(name="Food & Dining")
+        Choice.objects.create(name="Pizza Hut", category=food)
+        Choice.objects.create(name="Taco Bell", category=food)
+        Choice.objects.create(name="Subway", category=food)
+        Choice.objects.create(name="Salad Bar", category=food)
+        Choice.objects.create(name="Sushi Zen", category=food)
+        Choice.objects.create(name="Pasta Co", category=food)
+
+    all_choices = Choice.objects.all()
+    return render(request, 'dashboard.html', {
+        'choices': all_choices
+    })
 
 def choices(request):
     # Initialize default categories if none exist (beginner-friendly fallback)
