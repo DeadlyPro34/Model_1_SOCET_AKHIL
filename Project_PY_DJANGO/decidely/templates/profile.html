@@ -65,8 +65,8 @@
                 <i class="fa-solid fa-camera text-xl"></i>
             </div>
         </div>
-        <h1 class="text-2xl font-bold text-slate-900 mt-4">John Doe</h1>
-        <p class="text-slate-500 text-sm">john.doe@example.com</p>
+        <h1 class="text-2xl font-bold text-slate-900 mt-4 dark:text-white" id="profileDisplayName">{{ user.first_name }} {{ user.last_name }}</h1>
+        <p class="text-slate-500 text-sm dark:text-slate-400" id="profileDisplayEmail">{{ user.email }}</p>
         <div class="mt-4 flex gap-2">
             <span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-bold rounded-full uppercase tracking-wider">Professional Plan</span>
             <span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-full uppercase tracking-wider">Member since 2022</span>
@@ -79,48 +79,49 @@
             <p class="text-slate-500 text-xs">Update your personal details and account email.</p>
         </div>
 
-        <form class="space-y-6" onsubmit="event.preventDefault(); showUpdateMessage();">
+        <form id="profileForm" class="space-y-6">
+            {% csrf_token %}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">First Name</label>
-                    <input type="text" value="John" class="form-input" placeholder="Enter first name">
+                    <input type="text" id="profileFirstName" name="first_name" value="{{ user.first_name }}" class="form-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="Enter first name">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Last Name</label>
-                    <input type="text" value="Doe" class="form-input" placeholder="Enter last name">
+                    <input type="text" id="profileLastName" name="last_name" value="{{ user.last_name }}" class="form-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="Enter last name">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Email Address</label>
-                <input type="email" value="john.doe@example.com" class="form-input" placeholder="Enter email">
+                <input type="email" id="profileEmail" name="email" value="{{ user.email }}" class="form-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="Enter email">
                 <p class="text-[10px] text-slate-400 mt-1.5 italic">A confirmation email will be sent to the new address.</p>
             </div>
 
-            <div class="pt-4 border-t border-slate-100">
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
                 <div class="mb-6">
-                    <h3 class="font-bold text-slate-900">Security</h3>
-                    <p class="text-slate-500 text-xs">Change your password to keep your account secure.</p>
+                    <h3 class="font-bold text-slate-900 dark:text-white">Security</h3>
+                    <p class="text-slate-500 text-xs dark:text-slate-400">Change your password to keep your account secure.</p>
                 </div>
                 
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">New Password</label>
-                        <input type="password" class="form-input" placeholder="••••••••">
+                        <input type="password" id="profilePassword" name="password" class="form-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="••••••••">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Confirm New Password</label>
-                        <input type="password" class="form-input" placeholder="••••••••">
+                        <input type="password" id="profileConfirmPassword" class="form-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="••••••••">
                     </div>
                 </div>
             </div>
 
             <div class="pt-6 flex items-center justify-between">
-                <div id="saveStatus" class="hidden text-emerald-600 text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-left-2">
+                <div id="saveStatus" class="hidden text-emerald-600 text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-left-2 dark:text-emerald-400">
                     <i class="fa-solid fa-circle-check"></i>
                     Profile updated successfully!
                 </div>
-                <button type="submit" class="ml-auto px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-bold transition-all shadow-lg active:scale-95">
+                <button type="submit" class="ml-auto px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-bold transition-all shadow-lg active:scale-95 dark:bg-indigo-600 dark:hover:bg-indigo-500">
                     Save Changes
                 </button>
             </div>

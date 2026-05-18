@@ -43,28 +43,28 @@
         <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
             <div class="relative z-10">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Most Selected Choice</p>
-                <h3 class="text-xl font-bold text-slate-900">Taco Bell</h3>
-                <p class="text-xs text-indigo-600 font-semibold mt-2">Chosen 14 times this month</p>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ most_selected_choice_name }}</h3>
+                <p class="text-xs text-indigo-600 font-semibold mt-2 dark:text-indigo-400">Chosen {{ most_selected_choice_count }} times overall</p>
             </div>
-            <i class="fa-solid fa-crown absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+            <i class="fa-solid fa-crown absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform dark:text-slate-800"></i>
         </div>
 
         <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
             <div class="relative z-10">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Decisions</p>
-                <h3 class="text-xl font-bold text-slate-900">1,248</h3>
-                <p class="text-xs text-emerald-600 font-semibold mt-2">+12% vs last month</p>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ total_decisions }}</h3>
+                <p class="text-xs text-emerald-600 font-semibold mt-2 dark:text-emerald-400">Real-time logged decisions</p>
             </div>
-            <i class="fa-solid fa-bolt-lightning absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+            <i class="fa-solid fa-bolt-lightning absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform dark:text-slate-800"></i>
         </div>
 
         <div class="pro-card p-6 rounded-2xl relative overflow-hidden group">
             <div class="relative z-10">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Favorite Category</p>
-                <h3 class="text-xl font-bold text-slate-900">Food & Dining</h3>
-                <p class="text-xs text-orange-500 font-semibold mt-2">42% of all resolutions</p>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ favorite_category_name }}</h3>
+                <p class="text-xs text-orange-500 font-semibold mt-2 dark:text-orange-400">{{ favorite_category_pct }}% of all resolutions</p>
             </div>
-            <i class="fa-solid fa-heart absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform"></i>
+            <i class="fa-solid fa-heart absolute -bottom-2 -right-2 text-6xl text-slate-50 opacity-10 group-hover:scale-110 transition-transform dark:text-slate-800"></i>
         </div>
     </section>
 
@@ -99,17 +99,17 @@
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
                 <span class="bg-indigo-500/20 text-indigo-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Weekly Performance</span>
-                <h2 class="text-2xl font-bold mt-3">You made 12 decisions this week.</h2>
-                <p class="text-slate-400 text-sm mt-1 max-w-md">That's an average of 1.7 decisions per day. You saved approximately 24 minutes of deliberation time.</p>
+                <h2 class="text-2xl font-bold mt-3">You made {{ weekly_decisions }} decisions this week.</h2>
+                <p class="text-slate-400 text-sm mt-1 max-w-md">That's an average of {{ avg_decisions_per_day }} decisions per day. You saved approximately {{ time_saved_minutes }} minutes of deliberation time.</p>
             </div>
             <div class="flex gap-4">
                 <div class="text-center">
-                    <p class="text-2xl font-bold">84%</p>
+                    <p class="text-2xl font-bold">100%</p>
                     <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Confidence Score</p>
                 </div>
                 <div class="w-px h-10 bg-slate-800"></div>
                 <div class="text-center">
-                    <p class="text-2xl font-bold">12</p>
+                    <p class="text-2xl font-bold">{{ weekly_decisions }}</p>
                     <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Goals Reached</p>
                 </div>
             </div>
@@ -117,6 +117,10 @@
         <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
     </section>
 </div>
+
+{{ category_labels|json_script:"category-labels-data" }}
+{{ category_data|json_script:"category-values-data" }}
+
 {% endblock %}
 
 {% block extra_js %}

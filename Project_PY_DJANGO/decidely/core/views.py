@@ -6,6 +6,7 @@ from django.db.models import Count
 from django.utils import timezone
 import json
 import csv
+from django.contrib.auth.models import User
 from .models import Category, Choice, DecisionHistory, Settings
 
 def dashboard(request):
@@ -208,7 +209,55 @@ def insights(request):
     })
 
 def profile(request):
-    return render(request, 'profile.html')
+    if request.method == 'POST':
+        # Handle both JSON fetch and standard Form post
+        if request.content_type == 'application/json':
+            import json
+            try:
+                data = json.loads(request.body)
+                first_name = data.get('first_name', '').strip()
+                last_name = data.get('last_name', '').strip()
+                email = data.get('email', '').strip()
+                password = data.get('password', '').strip()
+            except json.JSONDecodeError:
+                return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+        else:
+            first_name = request.POST.get('first_name', '').strip()
+            last_name = request.POST.get('last_name', '').strip()
+            email = request.POST.get('email', '').strip()
+            password = request.POST.get('password', '').strip()
+
+        if request.user.is_authenticated:
+            user = request.user
+        else:
+            user, _ = User.objects.get_or_create(username='demo_user', defaults={'email': 'john.doe@example.com'})
+            
+        if first_name:
+            user.first_name = first_name
+        if last_name:
+            user.last_name = last_name
+        if email:
+            user.email = email
+        if password:
+            user.set_password(password)
+        user.save()
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.content_type == 'application/json':
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Profile saved successfully!',
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email
+            })
+        return redirect('core:profile')
+        
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user, _ = User.objects.get_or_create(username='demo_user', defaults={'email': 'john.doe@example.com', 'first_name': 'John', 'last_name': 'Doe'})
+        
+    return render(request, 'profile.html', {'user': user})
 
 def settings(request):
     return render(request, 'settings.html')
