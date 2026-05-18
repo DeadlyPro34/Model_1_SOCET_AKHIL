@@ -92,6 +92,7 @@
 </div>
 
 <div id="addCategoryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    {% csrf_token %}
     <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-slate-200 animate-pop">
         <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
             <h3 class="font-bold text-slate-900">Add New Category</h3>

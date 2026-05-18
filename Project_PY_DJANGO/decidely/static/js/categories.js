@@ -38,11 +38,14 @@ function saveCategory() {
     const name = nameInput.value.trim();
     if (!name) return;
 
+    const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+    const csrfToken = csrfInput ? csrfInput.value : getCookie('csrftoken');
+
     fetch('/categories/add/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
+            'X-CSRFToken': csrfToken,
             'X-Requested-With': 'XMLHttpRequest'
         },
         body: JSON.stringify({ name: name })

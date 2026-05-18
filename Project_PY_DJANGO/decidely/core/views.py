@@ -123,7 +123,7 @@ def history(request):
     })
 
 def categories(request):
-    categories_list = Category.objects.annotate(choice_count=Count('choice')).order_by('name')
+    categories_list = Category.objects.annotate(choice_count=Count('choices')).order_by('name')
     return render(request, 'categories.html', {'categories': categories_list})
 
 @require_POST
