@@ -92,7 +92,17 @@ def delete_choice(request, choice_id):
     return redirect('core:choices')
 
 def history(request):
-    return render(request, 'history.html')
+    from django.utils import timezone
+    history_records = DecisionHistory.objects.all().order_by('-timestamp')
+    total_count = history_records.count()
+    today_start = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    today_count = history_records.filter(timestamp__gte=today_start).count()
+    
+    return render(request, 'history.html', {
+        'history': history_records,
+        'total_count': total_count,
+        'today_count': today_count
+    })
 
 def categories(request):
     return render(request, 'categories.html')
