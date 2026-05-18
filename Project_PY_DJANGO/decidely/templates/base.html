@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decidely | {% block title %}Premium Decision Tool{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="h-screen flex overflow-hidden">
+    <div class="fixed inset-0 bg-dots -z-10"></div>
+
+    <aside class="w-64 h-full bg-white border-r border-slate-200 flex flex-col z-20">
+        <div class="p-6">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                    D
+                </div>
+                <span class="text-lg font-bold tracking-tight text-slate-900">Decidely</span>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-2 space-y-1">
+            <p class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Main Menu</p>
+            <a href="{% url 'core:dashboard' %}" class="sidebar-link {% block active_dashboard %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-house-chimney text-xs"></i>
+                Dashboard
+            </a>
+            <a href="{% url 'core:choices' %}" class="sidebar-link {% block active_choices %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-layer-group text-xs"></i>
+                Choices Library
+            </a>
+            <a href="{% url 'core:history' %}" class="sidebar-link {% block active_history %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-clock-rotate-left text-xs"></i>
+                Resolution History
+            </a>
+            
+            <p class="px-3 mt-8 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Workspace</p>
+            <a href="{% url 'core:categories' %}" class="sidebar-link {% block active_categories %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-tags text-xs"></i>
+                Categories
+            </a>
+            <a href="{% url 'core:profile' %}" class="sidebar-link {% block active_profile %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-user text-xs"></i>
+                Profile
+            </a>
+            <a href="{% url 'core:settings' %}" class="sidebar-link {% block active_settings %}{% endblock %} flex items-center gap-3 px-3 py-2.5 text-sm font-medium">
+                <i class="fa-solid fa-gear text-xs"></i>
+                Settings
+            </a>
+        </nav>
+
+        <div class="p-4 mt-auto border-t border-slate-100">
+            <div class="flex items-center gap-3 px-2 py-3">
+                <img src="https://placehold.co/40x40/4F46E5/FFFFFF?text=JD"
+                    class="w-9 h-9 rounded-full border border-slate-200" alt="Avatar">
+                <div class="overflow-hidden">
+                    <p class="text-xs font-semibold text-slate-900 truncate">John Doe</p>
+                    <p class="text-[10px] text-slate-500 truncate">Professional Plan</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 h-full overflow-y-auto relative bg-slate-50/50">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

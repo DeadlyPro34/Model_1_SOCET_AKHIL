@@ -24,6 +24,11 @@ body {
     background: #FFFFFF;
     border: 1px solid var(--border-subtle);
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.pro-card:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
 }
 
 .sidebar-link {
@@ -42,24 +47,25 @@ body {
     font-weight: 600;
 }
 
-.status-pill {
+.status-pill, .status-badge {
     padding: 2px 10px;
     border-radius: 12px;
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+    display: inline-block;
 }
 
-input[type="date"],
+input,
 select {
     border: 1px solid var(--border-subtle);
-    outline: none;
-    transition: all 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input[type="date"]:focus,
+input:focus,
 select:focus {
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.05);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
