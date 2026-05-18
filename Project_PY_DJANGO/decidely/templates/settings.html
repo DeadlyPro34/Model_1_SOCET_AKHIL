@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Settings{% endblock %}
+
+{% block active_settings %}active{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Switch styles */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background-color: #E2E8F0;
+        transition: .3s;
+        border-radius: 24px;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .3s;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    input:checked + .slider {
+        background-color: #4F46E5;
+    }
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
+    <div class="flex items-center gap-2 text-sm text-slate-500 font-medium">
+        <span>Account</span>
+        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+        <span class="text-slate-900">Settings</span>
+    </div>
+    <div class="flex items-center gap-3">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-1 rounded">v2.4.0</span>
+    </div>
+</header>
+
+<div class="p-8 max-w-3xl mx-auto space-y-8 animate-slide-up">
+    <div>
+        <h1 class="text-3xl font-bold text-slate-900">Settings</h1>
+        <p class="text-slate-500 mt-1">Manage your app preferences and workspace data.</p>
+    </div>
+
+    <div class="space-y-6">
+        <!-- Appearance Card -->
+        <section class="pro-card rounded-2xl overflow-hidden">
+            <div class="p-6 border-b border-slate-100">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-indigo-500 text-sm"></i>
+                    Appearance
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">Customize how Decidely looks on your device.</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">Dark Mode</p>
+                        <p class="text-xs text-slate-400">Switch between light and dark themes.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">Reduced Motion</p>
+                        <p class="text-xs text-slate-400">Simplify animations for better accessibility.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notifications Card -->
+        <section class="pro-card rounded-2xl overflow-hidden">
+            <div class="p-6 border-b border-slate-100">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-bell text-indigo-500 text-sm"></i>
+                    Notifications
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">Stay updated on your decision metrics.</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">Push Notifications</p>
+                        <p class="text-xs text-slate-400">Receive alerts for reminders and daily goals.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">Weekly Digest</p>
+                        <p class="text-xs text-slate-400">Get a summary of your decision insights via email.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Management Card -->
+        <section class="pro-card rounded-2xl overflow-hidden border-rose-100 bg-rose-50/10">
+            <div class="p-6 border-b border-rose-100 bg-rose-50/20">
+                <h3 class="font-bold text-rose-600 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-sm"></i>
+                    Danger Zone
+                </h3>
+                <p class="text-xs text-rose-500 mt-1">Irreversible actions for your account data.</p>
+            </div>
+            <div class="p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">Reset All Data</p>
+                        <p class="text-xs text-slate-400">Clear all choices, categories, and history. This cannot be undone.</p>
+                    </div>
+                    <button onclick="handleReset()" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl text-sm font-bold transition-all shadow-sm active:scale-95">
+                        Reset Workspace
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="pt-4 flex justify-end">
+        <button class="px-8 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
+            Save Changes
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/settings.js' %}"></script>
+{% endblock %}

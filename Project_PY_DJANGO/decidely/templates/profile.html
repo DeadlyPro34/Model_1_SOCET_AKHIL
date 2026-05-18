@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile Settings{% endblock %}
+
+{% block active_profile %}active{% endblock %}
+
+{% block extra_head %}
+<style>
+    .avatar-upload {
+        position: relative;
+        cursor: pointer;
+    }
+    .avatar-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-center: center;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    .avatar-upload:hover .avatar-overlay {
+        opacity: 1;
+    }
+    .form-input {
+        width: 100%;
+        padding: 0.625rem 1rem;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 0.75rem;
+        font-size: 0.875rem;
+        transition: all 0.2s;
+    }
+    .form-input:focus {
+        background: white;
+        border-color: #4F46E5;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
+    <div class="flex items-center gap-2 text-sm text-slate-500 font-medium">
+        <span>Workspace</span>
+        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+        <span class="text-slate-900">Profile</span>
+    </div>
+    
+    <div class="flex items-center gap-4">
+        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-widest">Account Verified</span>
+    </div>
+</header>
+
+<div class="p-8 max-w-3xl mx-auto space-y-8">
+    <section class="pro-card p-8 rounded-2xl flex flex-col items-center text-center">
+        <div class="avatar-upload group flex flex-col items-center">
+            <img src="https://placehold.co/120x120/4F46E5/FFFFFF?text=JD" class="w-24 h-24 rounded-full border-4 border-white shadow-lg" alt="User Avatar">
+            <div class="avatar-overlay w-24 h-24 flex items-center justify-center rounded-full">
+                <i class="fa-solid fa-camera text-xl"></i>
+            </div>
+        </div>
+        <h1 class="text-2xl font-bold text-slate-900 mt-4">John Doe</h1>
+        <p class="text-slate-500 text-sm">john.doe@example.com</p>
+        <div class="mt-4 flex gap-2">
+            <span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-bold rounded-full uppercase tracking-wider">Professional Plan</span>
+            <span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-full uppercase tracking-wider">Member since 2022</span>
+        </div>
+    </section>
+
+    <section class="pro-card p-8 rounded-2xl">
+        <div class="mb-6">
+            <h3 class="font-bold text-slate-900">General Information</h3>
+            <p class="text-slate-500 text-xs">Update your personal details and account email.</p>
+        </div>
+
+        <form class="space-y-6" onsubmit="event.preventDefault(); showUpdateMessage();">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">First Name</label>
+                    <input type="text" value="John" class="form-input" placeholder="Enter first name">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Last Name</label>
+                    <input type="text" value="Doe" class="form-input" placeholder="Enter last name">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Email Address</label>
+                <input type="email" value="john.doe@example.com" class="form-input" placeholder="Enter email">
+                <p class="text-[10px] text-slate-400 mt-1.5 italic">A confirmation email will be sent to the new address.</p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100">
+                <div class="mb-6">
+                    <h3 class="font-bold text-slate-900">Security</h3>
+                    <p class="text-slate-500 text-xs">Change your password to keep your account secure.</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">New Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Confirm New Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••">
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 flex items-center justify-between">
+                <div id="saveStatus" class="hidden text-emerald-600 text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-left-2">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Profile updated successfully!
+                </div>
+                <button type="submit" class="ml-auto px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-bold transition-all shadow-lg active:scale-95">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="pro-card p-8 rounded-2xl border-red-100 bg-red-50/10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+                <h3 class="font-bold text-red-600">Delete Account</h3>
+                <p class="text-slate-500 text-xs mt-1">Permanently remove your account and all data. This action is irreversible.</p>
+            </div>
+            <button class="px-6 py-2.5 bg-white border border-red-200 text-red-600 hover:bg-red-50 rounded-xl text-sm font-bold transition-all">
+                Deactivate
+            </button>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
