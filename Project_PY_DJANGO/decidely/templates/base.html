@@ -31,13 +31,18 @@
         /* Elevate table and side heading contrast in dark mode */
         .dark th,
         .dark thead th,
+        .dark thead th.text-slate-500,
+        .dark th.text-slate-500,
+        .dark tr th,
         .dark .text-slate-500,
         .dark .text-xs.text-slate-500,
         .dark p.text-slate-500,
         .dark span.text-slate-500,
         .dark .text-slate-400,
-        .dark p.text-xs.text-slate-400 {
-            color: #CBD5E1 !important; /* Extremely clean, readable light gray/slate */
+        .dark p.text-xs.text-slate-400,
+        .dark .text-slate-300,
+        .dark i.text-slate-300 {
+            color: #F1F5F9 !important; /* Premium ultra-bright Slate-100 for perfect legibility in dark mode */
         }
 
         /* Stunning glowing backdrop icons for stats cards in dark mode */
@@ -55,6 +60,32 @@
         .dark .fa-heart {
             color: #F87171 !important; /* Rose Red */
             opacity: 0.25 !important;
+        }
+
+        /* Dynamic premium promotional dark card (Advanced Logic block) */
+        .pro-card-dark {
+            background-color: #0F172A !important; /* Beautiful dark indigo-slate background in all modes */
+            border: 1px solid #1E293B !important;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+        }
+        .pro-card-dark:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.15) !important;
+        }
+        .pro-card-dark h3 {
+            color: #FFFFFF !important;
+        }
+        .pro-card-dark p {
+            color: #94A3B8 !important;
+        }
+        .pro-card-dark button {
+            background-color: #FFFFFF !important;
+            color: #0F172A !important;
+            transition: all 0.2s ease;
+        }
+        .pro-card-dark button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
         }
     </style>
     {% block extra_head %}{% endblock %}
