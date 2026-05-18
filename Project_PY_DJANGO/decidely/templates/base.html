@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{% if app_settings.theme == 'dark' %}dark{% endif %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +10,53 @@
         tailwind.config = {
             darkMode: 'class'
         }
-        // Early theme initialization to prevent UI flashing
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Database theme is the single source of truth, synchronizing localStorage
+        const dbTheme = "{% if app_settings.theme == 'dark' %}dark{% else %}light{% endif %}";
+        if (dbTheme === 'dark') {
             document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
         } else {
             document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}?v=1.2">
+    <style>
+        /* ========================================================
+           HIGH LEGIBILITY & PREMIUM CONTRAST FIXES (BYPASS CACHE)
+           ======================================================== */
+
+        /* Elevate table and side heading contrast in dark mode */
+        .dark th,
+        .dark thead th,
+        .dark .text-slate-500,
+        .dark .text-xs.text-slate-500,
+        .dark p.text-slate-500,
+        .dark span.text-slate-500,
+        .dark .text-slate-400,
+        .dark p.text-xs.text-slate-400 {
+            color: #CBD5E1 !important; /* Extremely clean, readable light gray/slate */
+        }
+
+        /* Stunning glowing backdrop icons for stats cards in dark mode */
+        .dark .fa-crown {
+            color: #818CF8 !important; /* Vibrant Indigo */
+            opacity: 0.25 !important;
+        }
+
+        .dark .fa-bolt-lightning,
+        .dark .fa-bolt {
+            color: #FBBF24 !important; /* Bright Gold */
+            opacity: 0.25 !important;
+        }
+
+        .dark .fa-heart {
+            color: #F87171 !important; /* Rose Red */
+            opacity: 0.25 !important;
+        }
+    </style>
     {% block extra_head %}{% endblock %}
 </head>
 <body class="h-screen flex overflow-hidden">

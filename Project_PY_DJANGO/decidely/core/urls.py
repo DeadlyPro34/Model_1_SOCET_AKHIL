@@ -14,4 +14,5 @@ urlpatterns = [
     path('insights/', views.insights, name='insights'),
     path('profile/', views.profile, name='profile'),
     path('settings/', views.settings, name='settings'),
+    path('settings/save/', views.save_settings, name='save_settings'),
 ]

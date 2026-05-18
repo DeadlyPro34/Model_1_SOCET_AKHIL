@@ -66,7 +66,8 @@
         <p class="text-slate-500 mt-1">Manage your app preferences and workspace data.</p>
     </div>
 
-    <div class="space-y-6">
+    <form method="POST" action="{% url 'core:save_settings' %}" class="space-y-6">
+        {% csrf_token %}
         <!-- Appearance Card -->
         <section class="pro-card rounded-2xl overflow-hidden">
             <div class="p-6 border-b border-slate-100">
@@ -83,7 +84,7 @@
                         <p class="text-xs text-slate-400">Switch between light and dark themes.</p>
                     </div>
                     <label class="switch">
-                        <input type="checkbox" id="themeToggle">
+                        <input type="checkbox" id="themeToggle" name="theme" value="dark" {% if app_settings.theme == 'dark' %}checked{% endif %}>
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -93,7 +94,7 @@
                         <p class="text-xs text-slate-400">Simplify animations for better accessibility.</p>
                     </div>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="reduced_motion">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -116,7 +117,7 @@
                         <p class="text-xs text-slate-400">Receive alerts for reminders and daily goals.</p>
                     </div>
                     <label class="switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" name="notifications" value="true" {% if app_settings.notifications %}checked{% endif %}>
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -126,7 +127,7 @@
                         <p class="text-xs text-slate-400">Get a summary of your decision insights via email.</p>
                     </div>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="weekly_digest">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -148,19 +149,19 @@
                         <p class="text-sm font-semibold text-slate-700">Reset All Data</p>
                         <p class="text-xs text-slate-400">Clear all choices, categories, and history. This cannot be undone.</p>
                     </div>
-                    <button onclick="handleReset()" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl text-sm font-bold transition-all shadow-sm active:scale-95">
+                    <button type="button" onclick="handleReset()" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl text-sm font-bold transition-all shadow-sm active:scale-95">
                         Reset Workspace
                     </button>
                 </div>
             </div>
         </section>
-    </div>
 
-    <div class="pt-4 flex justify-end">
-        <button class="px-8 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
-            Save Changes
-        </button>
-    </div>
+        <div class="pt-4 flex justify-end">
+            <button type="submit" class="px-8 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
+                Save Changes
+            </button>
+        </div>
+    </form>
 </div>
 {% endblock %}
 

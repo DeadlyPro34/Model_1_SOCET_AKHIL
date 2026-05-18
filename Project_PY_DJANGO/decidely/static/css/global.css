@@ -226,3 +226,79 @@ select:focus {
     background-color: rgba(148, 163, 184, 0.15) !important;
     color: #F8FAFC !important;
 }
+
+/* ==========================================
+   PREMIUM ADJUSTMENTS & REFINEMENTS
+   ========================================== */
+
+/* Custom Dark-Mode Scrollbars */
+.dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+    background: #0B0F19;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #1F2937;
+    border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}
+
+/* Glassmorphic Dark modal overlay */
+.dark .modal-backdrop,
+.dark .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(6px);
+}
+
+/* Premium Contrast Primary Buttons in Dark Mode */
+.dark .bg-slate-900 {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+}
+.dark .bg-slate-900:hover {
+    background-color: #E2E8F0 !important;
+}
+
+/* Fix active menu highlight */
+.dark .sidebar-link.active {
+    color: #818CF8 !important;
+    font-weight: 600;
+}
+
+/* ========================================================
+   HIGH LEGIBILITY & PREMIUM CONTRAST FIXES FOR DARK MODE
+   ======================================================== */
+
+/* Elevate table and side heading contrast in dark mode */
+.dark th,
+.dark thead th,
+.dark .text-slate-500,
+.dark .text-xs.text-slate-500,
+.dark p.text-slate-500,
+.dark span.text-slate-500,
+.dark .text-slate-400,
+.dark p.text-xs.text-slate-400 {
+    color: #CBD5E1 !important; /* Extremely clean, readable light gray/slate */
+}
+
+/* Stunning glowing backdrop icons for stats cards in dark mode */
+.dark .fa-crown {
+    color: #818CF8 !important; /* Vibrant Indigo */
+    opacity: 0.25 !important;
+}
+
+.dark .fa-bolt-lightning,
+.dark .fa-bolt {
+    color: #FBBF24 !important; /* Bright Gold */
+    opacity: 0.25 !important;
+}
+
+.dark .fa-heart {
+    color: #F87171 !important; /* Rose Red */
+    opacity: 0.25 !important;
+}
+

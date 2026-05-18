@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import Category, Choice, DecisionHistory
+from .models import Category, Choice, DecisionHistory, Settings
 
 def dashboard(request):
     # Initialize default categories if none exist (beginner-friendly fallback)
@@ -115,5 +115,17 @@ def profile(request):
 
 def settings(request):
     return render(request, 'settings.html')
+
+def save_settings(request):
+    if request.method == 'POST':
+        theme = 'dark' if request.POST.get('theme') == 'dark' else 'light'
+        notifications = True if request.POST.get('notifications') == 'true' else False
+        
+        settings, _ = Settings.objects.get_or_create(pk=1)
+        settings.theme = theme
+        settings.notifications = notifications
+        settings.save()
+        
+    return redirect('core:settings')
 
 

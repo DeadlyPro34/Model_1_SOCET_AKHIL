@@ -30,3 +30,14 @@ class DecisionHistory(models.Model):
     class Meta:
         verbose_name_plural = "Decision Histories"
 
+
+class Settings(models.Model):
+    theme = models.CharField(max_length=10, default='light')
+    notifications = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Settings (Theme: {self.theme}, Notifications: {self.notifications})"
+
+    class Meta:
+        verbose_name_plural = "Settings"
+
