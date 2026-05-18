@@ -39,20 +39,20 @@
         <div class="pro-card p-5 rounded-xl">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Library</p>
             <div class="flex items-baseline gap-2 mt-2">
-                <h3 class="text-2xl font-bold text-slate-900">{{ choices|length }}</h3>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{{ choices|length }}</h3>
             </div>
         </div>
         <div class="pro-card p-5 rounded-xl">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Resolved</p>
-            <h3 class="text-2xl font-bold text-slate-900 mt-2">892</h3>
+            <h3 class="text-2xl font-bold text-slate-900 mt-2 dark:text-white">{{ total_decisions }}</h3>
         </div>
         <div class="pro-card p-5 rounded-xl">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Avg. Time</p>
-            <h3 class="text-2xl font-bold text-slate-900 mt-2">1.2m</h3>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Today's Count</p>
+            <h3 class="text-2xl font-bold text-slate-900 mt-2 dark:text-white">{{ today_decisions }}</h3>
         </div>
         <div class="pro-card p-5 rounded-xl border-l-4 border-l-indigo-500">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Tenure</p>
-            <h3 class="text-2xl font-bold text-slate-900 mt-2">2 yrs</h3>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Categories</p>
+            <h3 class="text-2xl font-bold text-slate-900 mt-2 dark:text-white">{{ total_categories }}</h3>
         </div>
     </section>
 
@@ -101,19 +101,27 @@
                                 <th class="px-6 py-3 font-semibold text-slate-500 text-xs uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-4 font-medium">Lunch Options</td>
-                                <td class="px-6 py-4"><span class="status-badge bg-emerald-100 text-emerald-700">Taco Bell</span></td>
-                                <td class="px-6 py-4 text-slate-500">12:04 PM</td>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                            {% for record in recent_history %}
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">{{ record.category.name }}</td>
+                                <td class="px-6 py-4">
+                                    {% if "food" in record.category.name.lower or "dining" in record.category.name.lower or "eat" in record.category.name.lower %}
+                                    <span class="status-badge bg-emerald-100 text-emerald-700">{{ record.selected_choice.name }}</span>
+                                    {% else %}
+                                    <span class="status-badge bg-blue-100 text-blue-700">{{ record.selected_choice.name }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 text-slate-500">{{ record.timestamp|date:"h:i A" }}</td>
                                 <td class="px-6 py-4"><i class="fa-solid fa-ellipsis text-slate-300 cursor-pointer hover:text-slate-600"></i></td>
                             </tr>
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-4 font-medium">Movie Night</td>
-                                <td class="px-6 py-4"><span class="status-badge bg-blue-100 text-blue-700">Inception</span></td>
-                                <td class="px-6 py-4 text-slate-500">Yesterday</td>
-                                <td class="px-6 py-4"><i class="fa-solid fa-ellipsis text-slate-300 cursor-pointer hover:text-slate-600"></i></td>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+                                    No decisions recorded yet. Spin the wheel to make a decision!
+                                </td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -28,91 +28,66 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="categoryGrid">
-        <!-- Food & Dining -->
-        <div class="pro-card rounded-2xl p-6 group">
+        {% for category in categories %}
+        <div class="pro-card rounded-2xl p-6 group" data-category-id="{{ category.id }}">
             <div class="flex justify-between items-start mb-4">
-                <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center text-xl">
+                {% if "food" in category.name.lower or "dining" in category.name.lower or "eat" in category.name.lower or "rest" in category.name.lower %}
+                <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center text-xl dark:bg-orange-950/20 dark:text-orange-400">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
-                <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button class="text-slate-400 hover:text-indigo-600 transition-colors"><i class="fa-solid fa-pen-to-square text-sm"></i></button>
-                    <button class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can text-sm"></i></button>
-                </div>
-            </div>
-            <h3 class="font-bold text-slate-900 text-lg">Food & Dining</h3>
-            <p class="text-slate-500 text-sm mt-1">48 Saved Choices</p>
-            <div class="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Pool</span>
-                <div class="flex -space-x-2">
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200"></div>
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-300"></div>
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-indigo-100 text-[8px] flex items-center justify-center font-bold text-indigo-600">+46</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Study -->
-        <div class="pro-card rounded-2xl p-6 group">
-            <div class="flex justify-between items-start mb-4">
-                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+                {% elif "study" in category.name.lower or "book" in category.name.lower or "learn" in category.name.lower %}
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl dark:bg-blue-950/20 dark:text-blue-400">
                     <i class="fa-solid fa-book-open"></i>
                 </div>
-                <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button class="text-slate-400 hover:text-indigo-600 transition-colors"><i class="fa-solid fa-pen-to-square text-sm"></i></button>
-                    <button class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can text-sm"></i></button>
-                </div>
-            </div>
-            <h3 class="font-bold text-slate-900 text-lg">Study</h3>
-            <p class="text-slate-500 text-sm mt-1">12 Saved Choices</p>
-            <div class="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Learning</span>
-                <div class="flex -space-x-2">
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-blue-100 text-[8px] flex items-center justify-center font-bold text-blue-600">+12</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Health -->
-        <div class="pro-card rounded-2xl p-6 group">
-            <div class="flex justify-between items-start mb-4">
-                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl">
+                {% elif "health" in category.name.lower or "fit" in category.name.lower or "heart" in category.name.lower or "pulse" in category.name.lower or "exercise" in category.name.lower %}
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl dark:bg-emerald-950/20 dark:text-emerald-400">
                     <i class="fa-solid fa-heart-pulse"></i>
                 </div>
-                <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button class="text-slate-400 hover:text-indigo-600 transition-colors"><i class="fa-solid fa-pen-to-square text-sm"></i></button>
-                    <button class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can text-sm"></i></button>
-                </div>
-            </div>
-            <h3 class="font-bold text-slate-900 text-lg">Health</h3>
-            <p class="text-slate-500 text-sm mt-1">24 Saved Choices</p>
-            <div class="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Routine</span>
-                <div class="flex -space-x-2">
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-emerald-100 text-[8px] flex items-center justify-center font-bold text-emerald-600">+24</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Entertainment -->
-        <div class="pro-card rounded-2xl p-6 group">
-            <div class="flex justify-between items-start mb-4">
-                <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl">
+                {% elif "entertainment" in category.name.lower or "movie" in category.name.lower or "film" in category.name.lower or "play" in category.name.lower or "game" in category.name.lower or "fun" in category.name.lower %}
+                <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl dark:bg-purple-950/20 dark:text-purple-400">
                     <i class="fa-solid fa-film"></i>
                 </div>
+                {% elif "work" in category.name.lower or "job" in category.name.lower or "career" in category.name.lower or "professional" in category.name.lower or "code" in category.name.lower %}
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl dark:bg-indigo-950/20 dark:text-indigo-400">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                {% else %}
+                <div class="w-12 h-12 bg-slate-50 text-slate-600 rounded-xl flex items-center justify-center text-xl dark:bg-slate-800/20 dark:text-slate-400">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
+                {% endif %}
                 <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button class="text-slate-400 hover:text-indigo-600 transition-colors"><i class="fa-solid fa-pen-to-square text-sm"></i></button>
-                    <button class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                    <!-- Standard deletion via POST form with full CSRF compliance -->
+                    <form action="{% url 'core:delete_category' category.id %}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete the category &quot;{{ category.name }}&quot;? All choices in this category will be updated.')">
+                        {% csrf_token %}
+                        <button type="submit" class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                    </form>
                 </div>
             </div>
-            <h3 class="font-bold text-slate-900 text-lg">Entertainment</h3>
-            <p class="text-slate-500 text-sm mt-1">36 Saved Choices</p>
-            <div class="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Leisure</span>
+            <h3 class="font-bold text-slate-900 text-lg dark:text-white">{{ category.name }}</h3>
+            <p class="text-slate-500 text-sm mt-1 dark:text-slate-400">{{ category.choice_count }} Saved Choices</p>
+            <div class="mt-6 pt-4 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest dark:text-slate-500">Active Pool</span>
                 <div class="flex -space-x-2">
-                    <div class="w-6 h-6 rounded-full border-2 border-white bg-purple-100 text-[8px] flex items-center justify-center font-bold text-purple-600">+36</div>
+                    {% if category.choice_count > 0 %}
+                    <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200 dark:border-slate-900"></div>
+                    {% if category.choice_count > 1 %}
+                    <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-300 dark:border-slate-900"></div>
+                    {% endif %}
+                    <div class="w-6 h-6 rounded-full border-2 border-white bg-indigo-100 text-[8px] flex items-center justify-center font-bold text-indigo-600 dark:border-slate-900 dark:bg-indigo-950/40 dark:text-indigo-400">+{{ category.choice_count }}</div>
+                    {% else %}
+                    <span class="text-xs text-slate-300 dark:text-slate-600">Empty</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
+        {% empty %}
+        <div class="col-span-full py-12 text-center text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300 dark:text-slate-700"></i>
+            <p class="font-medium">No Categories Found</p>
+            <p class="text-xs mt-1">Click "Add Category" above to create one.</p>
+        </div>
+        {% endfor %}
     </div>
 </div>
 

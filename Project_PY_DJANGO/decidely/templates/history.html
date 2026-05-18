@@ -14,10 +14,10 @@
     </div>
     
     <div class="flex items-center gap-4">
-        <button class="text-slate-400 hover:text-slate-600 transition-colors">
+        <a href="{% url 'core:export_csv' %}" class="text-slate-400 hover:text-slate-600 transition-colors flex items-center">
             <i class="fa-solid fa-download mr-2"></i>
             <span class="text-xs font-bold uppercase tracking-widest">Export CSV</span>
-        </button>
+        </a>
     </div>
 </header>
 
@@ -53,22 +53,25 @@
     <div class="pro-card rounded-2xl p-4 flex flex-wrap items-center gap-4">
         <div class="flex-1 min-w-[200px] relative">
             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" placeholder="Search by pool or result..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white transition-all">
+            <input type="text" id="historySearchInput" placeholder="Search by pool or result..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white transition-all">
         </div>
         
         <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">From:</span>
-            <input type="date" class="bg-white rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600">
+            <input type="date" id="historyDateInput" class="bg-white rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600">
         </div>
         
         <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Category:</span>
-            <select class="bg-white rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600">
-                <option>All Categories</option>
+            <select id="historyCategoryFilter" class="bg-white rounded-lg px-3 py-1.5 text-xs font-medium text-slate-600">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
             </select>
         </div>
 
-        <button class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors">
+        <button id="historyResetBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors">
             Reset
         </button>
     </div>
@@ -86,7 +89,7 @@
             </thead>
             <tbody class="divide-y divide-slate-100">
                 {% for record in history %}
-                <tr class="hover:bg-slate-50/50 transition-colors group">
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group history-row" data-category-id="{{ record.category.id }}" data-pool="{{ record.category.name|lower }}" data-result="{{ record.selected_choice.name|lower }}" data-date="{{ record.timestamp|date:'Y-m-d' }}">
                     <td class="px-6 py-4">
                         <span class="font-semibold text-slate-700">{{ record.category.name }} Options</span>
                     </td>
@@ -147,4 +150,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/history.js' %}"></script>
 {% endblock %}
