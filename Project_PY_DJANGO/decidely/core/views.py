@@ -118,14 +118,32 @@ def settings(request):
 
 def save_settings(request):
     if request.method == 'POST':
-        theme = 'dark' if request.POST.get('theme') == 'dark' else 'light'
-        notifications = True if request.POST.get('notifications') == 'true' else False
+        # Handle both JSON fetch requests and standard form posts
+        if request.content_type == 'application/json':
+            import json
+            try:
+                data = json.loads(request.body)
+                theme = data.get('theme', 'light')
+                notifications = data.get('notifications', False)
+            except json.JSONDecodeError:
+                return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+        else:
+            theme = 'dark' if request.POST.get('theme') == 'dark' else 'light'
+            notifications = True if request.POST.get('notifications') in ['true', 'on'] else False
         
         settings, _ = Settings.objects.get_or_create(pk=1)
         settings.theme = theme
         settings.notifications = notifications
         settings.save()
         
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.content_type == 'application/json':
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Settings saved successfully!',
+                'theme': settings.theme,
+                'notifications': settings.notifications
+            })
+            
     return redirect('core:settings')
 
 
